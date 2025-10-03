@@ -28,7 +28,7 @@ function Header() {
   }
 
   return (
-    <header className="p-4 flex flex-col lg:flex-row justify-between items-center border-b">
+    <header className="h-32 lg:h-16 w-full p-4 fixed top-0 left-0 flex flex-col lg:flex-row justify-between items-center border-b bg-white">
       <h1 className="mb-2 lg:mb-0 font-bold">Cowabunga</h1>
       {authSection}
     </header>

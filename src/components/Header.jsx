@@ -7,8 +7,8 @@ function Header() {
 
   if (user) {
     authSection = (
-      <div className="flex flex-row justify-center items-center gap-4">
-        <span className="italic">{user.email}</span>
+      <div className="flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-4">
+        <span className="text-xs italic">{user.email}</span>
 
         <button className="w-50 px-4 py-2 border cursor-pointer" onClick={logout}>
           Logout
@@ -17,15 +17,19 @@ function Header() {
     );
   } else {
     authSection = (
-      <button className="w-50 px-4 py-2 border cursor-pointer" onClick={loginWithGoogle}>
-        Login with Google
-      </button>
+      <div className="flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-4">
+        <span className="text-xs italic"> Sign in to manage your collection</span>
+
+        <button className="w-50 px-4 py-2 border cursor-pointer" onClick={loginWithGoogle}>
+          Login with Google
+        </button>
+      </div>
     );
   }
 
   return (
-    <header className="p-4 justify-between flex items-center border">
-      <h1 className="font-bold">Cowabunga</h1>
+    <header className="p-4 flex flex-col lg:flex-row justify-between items-center border-b">
+      <h1 className="mb-2 lg:mb-0 font-bold">Cowabunga</h1>
       {authSection}
     </header>
   );

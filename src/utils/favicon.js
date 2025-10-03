@@ -1,7 +1,3 @@
-/**************************
-* RANDOM FAVICON BEHAVIOR *
-**************************/
-
 const base = import.meta.env.BASE_URL;
 
 export function setRandomFavicon(icons) {

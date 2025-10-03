@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { setRandomFavicon } from "./utils/favicon";
+import Header from "./components/Header";
 import "./App.css";
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
 
   return (
     <>
-      <h1>Cowabunga</h1>
+      <Header />
     </>
   );
 }

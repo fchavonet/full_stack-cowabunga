@@ -41,8 +41,10 @@ function CollectionPage() {
         map[row.card_id] = row;
       }
 
-      setCards(map);
-      setLoading(false);
+      setTimeout(() => {
+        setCards(map);
+        setLoading(false);
+      }, 1500);
     }
 
     fetchCards();
@@ -149,37 +151,38 @@ function CollectionPage() {
     }
   }
 
+  // Show loader until all data is ready.
+  if (loading) {
+    return (
+      <div className="h-screen flex flex-col justify-center items-center gap-2">
+        <div className="w-16 h-16 border-4 border-gray-300 border-t-green-500 rounded-full animate-spin"></div>
+        <p>Loading your collection...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-36 lg:pt-20 flex flex-col justify-center items-center">
       <Stats total={TOTAL_CARDS} owned={ownedCount} wanted={wantedCount} filter={filter} setFilter={setFilter} />
 
-      {loading && (
-        <div>
-          Loading your collection…
-        </div>
-      )}
 
-      {!loading && (
-        <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
-          {displayed.map((id) => {
-            const row = cards[id] || {};
+      <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        {displayed.map((id) => {
+          const row = cards[id] || {};
+          let containerClass = "p-3 flex flex-col justify-center items-center border rounded-2xl transition";
+          if (row.owned) {
+            containerClass += " border-green-500";
+          } else if (row.wanted) {
+            containerClass += " border-yellow-500";
+          }
 
-            let containerClass = "p-3 flex flex-col justify-center items-center border rounded-2xl transition";
-
-            if (row.owned) {
-              containerClass += " border-green-500";
-            } else if (row.wanted) {
-              containerClass += " border-yellow-500";
-            }
-
-            return (
-              <div key={id} className={containerClass}>
-                <Card id={id} owned={!!row.owned} wanted={!!row.wanted} onToggleOwned={toggleOwned} onToggleWanted={toggleWanted} />
-              </div>
-            );
-          })}
-        </div>
-      )}
+          return (
+            <div key={id} className={containerClass}>
+              <Card id={id} owned={!!row.owned} wanted={!!row.wanted} onToggleOwned={toggleOwned} onToggleWanted={toggleWanted} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -25,18 +25,18 @@
 
 ## <span id="description">Description</span>
 
-Cowabunga is a lightweight web application to inventory Teenage Mutant Ninja Turtles cards from the UniVersus company.
-<br>
-The idea came after a London trip where we discovered with a friend a new TMNT card collection and started buying packs.
+Cowabunga is a lightweight web application for cataloging Teenage Mutant Ninja Turtles cards from UniVersus games.
 
-I used the opportunity to continue practicing React, try out Supabase (Auth + Postgres), and ship a minimal but usable app in ~2 days.
+The idea came after a trip to London, where a friend and I discovered a new TMNT card collection and started buying packs.
+
+I used the opportunity to keep practicing React, experiment with Supabase (Auth + Postgres), and ship a minimal but functional app in about two days.
 
 This is a personal, non-commercial project. Not affiliated with UVS Games, Nickelodeon, or any rights holder. All trademarks belong to their respective owners.
 
 ## <span id="objectives">Objectives</span>
 
 - Practice a fast end-to-end flow: Vite + React, Supabase for Auth/DB, GitHub Pages deployment.
-- Keep the scope minimal yet useful: Google sign-in, list + simple inventory states, sorting...
+- Keep the scope minimal yet useful: Google sign-in, card list, simple inventory states, and sorting.
 - Structure data for future expansion.
 - Keep code readable and straightforward.
 
@@ -61,7 +61,7 @@ This is a personal, non-commercial project. Not affiliated with UVS Games, Nicke
 | **FILES**           | **DESCRIPTION**                                   |
 | :-----------------: | ------------------------------------------------- |
 | `public`            | Public assets.                                    |
-| `src`               | React source code (components, utilities...).     |
+| `src`               | React source code (components, utilities, etc.).     |
 | `index.html`        | Application's HTML entry point.                   |
 | `vite.config.js`    | Vite configuration for development and building.  |
 | `package.json`      | Dependencies and scripts configuration.           |
@@ -108,9 +108,11 @@ npm install
 | :----------: | :-----------: | :---------------: | ------------------------------ |
 | `user_id`    | `uuid`        | -                 | Foreign key → `auth.users.id`. |
 | `card_id`    | `text`        | -                 | Card identifier.               |
-| `owned`      | `bool`        | `whether`         | The user owns this card.       |
-| `wanted`     | `bool`        | `whether`         | The user wants this card.      |
+| `owned`      | `bool`        | `false`           | The user owns this card.       |
+| `wanted`     | `bool`        | `false`           | The user wants this card.      |
 | `updated_at` | `timestamptz` | `now()`           | Last update timestamp.         |
+
+6. Set up table security and policies:
 
     - Enable Row Level Security (RLS) on the table.
     - Add the following policy rules (SQL or via UI):
@@ -132,7 +134,7 @@ on card_status for update
 using (auth.uid() = user_id);
 ```
 
-6. Configure environment variables:
+7. Configure environment variables:
 
     - Create a `.env.local` file at the project root with:
 
@@ -141,14 +143,17 @@ VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-    - In Supabase Dashboard, go to Settings → API, then copy your Project URL and anon public key.
-    - Then enable Google provider under Authentication → Providers, and set your Redirect URLs to match local environments:
+> In Supabase Dashboard, go to Settings → API, then copy your Project URL and anon public key.
+
+8. Then enable the Google provider:
+    
+- Go to Authentication → Providers, enable Google, and set your Redirect URLs to match your local environment:
 
 ```bash
 http://localhost:3000
 ```
 
-7. Start the development server:
+9. Start the development server:
 
 ```bash
 npm run dev
@@ -158,7 +163,7 @@ npm run dev
 
 1. Open the app and sign in with Google.
 2. Browse the cards list.
-3. Toggle Owned / Want on any card.
+3. Toggle the Owned or Wanted status on any card.
 4. Use sorting controls to reorganize the list.
 
 You can also test the web application online by clicking [here](https://fchavonet.github.io/web-cowabunga/). 
@@ -170,7 +175,7 @@ You can also test the web application online by clicking [here](https://fchavone
     </tr>
     <tr valign="top">
         <td align="center">
-            <img src="./public/screenshots/screenshot-cowabung-desktop.webp" alt="Screenshots">
+            <img src="./public/screenshots/screenshot-cowabunga-desktop.webp" alt="Screenshots">
         </td>
         <td align="center">
             <img src="./public/screenshots/screenshot-cowabunga-mobile.webp" alt="Mobile Screenshot" width="100%">
@@ -183,7 +188,7 @@ You can also test the web application online by clicking [here](https://fchavone
 - Search & filters (character, rarity...).
 - CSV import/export to batch update inventory.
 - PWA & offline caching for quick mobile access.
-- Add last images (secret cards).
+- Add missing images (secret cards).
 
 ## <span id="thanks">Thanks</span>
 

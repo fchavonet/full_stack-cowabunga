@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import Card from "../components/Card";
 import Stats from "../components/Stats";
 
-const TOTAL_CARDS = 186;
+const TOTAL_CARDS = 238;
 
 function CollectionPage() {
   const { user } = useAuth();

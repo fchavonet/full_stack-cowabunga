@@ -154,7 +154,7 @@ function CollectionPage() {
   // Show loader until all data is ready.
   if (loading) {
     return (
-      <div className="h-screen flex flex-col justify-center items-center gap-2">
+      <div className="h-full pt-34 lg:pt-18 flex flex-col justify-center items-center gap-2">
         <div className="w-16 h-16 border-4 border-gray-300 border-t-green-500 rounded-full animate-spin"></div>
         <p>Loading your collection...</p>
       </div>
@@ -162,14 +162,14 @@ function CollectionPage() {
   }
 
   return (
-    <div className="pt-36 lg:pt-20 flex flex-col justify-center items-center">
+    <div className="pt-38 lg:pt-22 flex flex-col justify-center items-center">
       <Stats total={TOTAL_CARDS} owned={ownedCount} wanted={wantedCount} filter={filter} setFilter={setFilter} />
 
 
-      <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+      <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4">
         {displayed.map((id) => {
           const row = cards[id] || {};
-          let containerClass = "p-3 flex flex-col justify-center items-center border rounded-2xl transition";
+          let containerClass = "p-2 flex flex-col justify-center items-center border rounded-2xl transition";
           if (row.owned) {
             containerClass += " border-green-500";
           } else if (row.wanted) {

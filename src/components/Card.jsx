@@ -3,10 +3,10 @@ import { getCardImageUrl } from "../lib/cardImages";
 function Card({ id, owned, wanted, onToggleOwned, onToggleWanted }) {
   const src = getCardImageUrl(id);
 
-  // Style for the "Have" button (active = green).
-  let haveBtnClass = "px-2 py-1 flex-1 border rounded-xl cursor-pointer transition";
+  // Style for the "Owned" button (active = green).
+  let ownedBtnClass = "px-2 py-1 flex-1 border rounded-xl cursor-pointer transition";
   if (owned) {
-    haveBtnClass += " bg-green-500";
+    ownedBtnClass += " bg-green-500";
   }
 
   // Style for the "Want" button (active = yellow).
@@ -26,8 +26,8 @@ function Card({ id, owned, wanted, onToggleOwned, onToggleWanted }) {
       </div>
 
       <div className="w-full flex flex-row gap-3">
-        <button className={haveBtnClass} onClick={() => onToggleOwned(id)}>
-          Have
+        <button className={ownedBtnClass} onClick={() => onToggleOwned(id)}>
+          Owned
         </button>
 
         <button className={wantBtnClass} onClick={() => onToggleWanted(id)}>

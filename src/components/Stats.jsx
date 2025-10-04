@@ -15,7 +15,7 @@ function Stats({ total, owned, wanted, setFilter }) {
         </button>
 
         <button className={getButtonClass("owned") + " bg-green-500"} onClick={() => setFilter("owned")}>
-          Have: {owned}/{total}
+          Owned: {owned}/{total}
         </button>
       </div>
 

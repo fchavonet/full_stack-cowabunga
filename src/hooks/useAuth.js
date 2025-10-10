@@ -4,6 +4,7 @@ import { supabase } from "../lib/supabaseClient";
 export function useAuth() {
   const [user, setUser] = useState(null);
 
+  // Initialize user session and subscribe to auth state changes.
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session && data.session.user) {
@@ -13,6 +14,7 @@ export function useAuth() {
       }
     });
 
+    // Listen for login/logout or token refresh events.
     const { data: subscription } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         if (session && session.user) {
@@ -23,11 +25,13 @@ export function useAuth() {
       }
     );
 
+    // Clean up the listener on unmount.
     return () => {
       subscription.subscription.unsubscribe();
     };
   }, []);
 
+  // Log in using Google OAuth provider.
   async function loginWithGoogle() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -41,6 +45,7 @@ export function useAuth() {
     }
   }
 
+  // Log out the current user.
   async function logout() {
     await supabase.auth.signOut();
   }

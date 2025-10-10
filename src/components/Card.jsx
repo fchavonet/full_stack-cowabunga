@@ -1,6 +1,6 @@
 import { getCardImageUrl } from "../lib/cardImages";
 
-function Card({ id, owned, wanted, onToggleOwned, onToggleWanted }) {
+function Card({ id, badge, owned, wanted, onToggleOwned, onToggleWanted }) {
   const src = getCardImageUrl(id);
 
   // Style for the "Owned" button (active = green).
@@ -19,7 +19,7 @@ function Card({ id, owned, wanted, onToggleOwned, onToggleWanted }) {
     <div className="flex flex-col justify-center items-center gap-3">
       <div className="relative flex flex-col justify-center items-center">
         <span className="absolute top-0 right-0 px-2 py-1 text-xs rounded-tr-xl rounded-bl-xl bg-gray-950/75">
-          {id}/186
+          {badge}
         </span>
 
         <img className="w-full h-auto rounded-xl outline outline-gray-800 object-contain" src={src} loading="lazy" alt={"Card " + id} />

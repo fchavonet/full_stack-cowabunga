@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../hooks/useAuth";
+import { getAllCardIds } from "../lib/cardImages";
 import Card from "../components/Card";
 import Stats from "../components/Stats";
 
-const TOTAL_CARDS = 238;
-
 function CollectionPage() {
   const { user } = useAuth();
-
   const [cards, setCards] = useState({});
+  const [type, setType] = useState("all");
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
+
+  // Retrieve all card IDs grouped by category.
+  const { all, regular, special, starter, chrome, promotional, counts } = getAllCardIds();
 
   useEffect(() => {
     // Fetch cards from Supabase on mount or when user changes.
@@ -41,6 +43,7 @@ function CollectionPage() {
         map[row.card_id] = row;
       }
 
+      // Artificial delay for smooth UI loading.
       setTimeout(() => {
         setCards(map);
         setLoading(false);
@@ -50,22 +53,23 @@ function CollectionPage() {
     fetchCards();
   }, [user]);
 
+  // Reset filter to "all" whenever card type changes.
+  useEffect(() => {
+    setFilter("all");
+  }, [type]);
+
   // Toggle "owned" status (exclusive with "wanted").
   async function toggleOwned(cardId) {
     if (!user) {
       return;
     }
-
     const current = cards[cardId] || { owned: false, wanted: false };
-    const nextOwned = !current.owned;
-    // Enforce exclusivity.
-    const nextWanted = false;
 
     const payload = {
       user_id: user.id,
       card_id: cardId,
-      owned: nextOwned,
-      wanted: nextWanted,
+      owned: !current.owned,
+      wanted: false,
     };
 
     const { data, error } = await supabase
@@ -90,15 +94,12 @@ function CollectionPage() {
     }
 
     const current = cards[cardId] || { owned: false, wanted: false };
-    const nextWanted = !current.wanted;
-    // Enforce exclusivity.
-    const nextOwned = false;
 
     const payload = {
       user_id: user.id,
       card_id: cardId,
-      owned: nextOwned,
-      wanted: nextWanted,
+      owned: false,
+      wanted: !current.wanted,
     };
 
     const { data, error } = await supabase
@@ -115,41 +116,129 @@ function CollectionPage() {
     setCards((prev) => ({ ...prev, [cardId]: data }));
   }
 
-  // Count owned and wanted cards.
-  let ownedCount = 0;
-  let wantedCount = 0;
+  // Select which card IDs to display based on selected type.
+  let idsToShow = all;
 
-  // Filter displayed cards based on current filter.
-  const values = Object.values(cards);
-
-  for (let i = 0; i < values.length; i++) {
-    const row = values[i];
-
-    if (row.owned) {
-      ownedCount++;
-    }
-
-    if (row.wanted) {
-      wantedCount++;
-    }
+  if (type === "regular") {
+    idsToShow = regular;
+  } else if (type === "special") {
+    idsToShow = special;
+  } else if (type === "starter") {
+    idsToShow = starter;
+  } else if (type === "chrome") {
+    idsToShow = chrome;
+  } else if (type === "promotional") {
+    idsToShow = promotional;
   }
 
-  const displayed = [];
+  // Compute statistics for the selected type.
+  const totalForType = idsToShow.length;
+  const ownedCount = idsToShow.filter((id) => cards[id]?.owned).length;
+  const wantedCount = idsToShow.filter((id) => cards[id]?.wanted).length;
 
-  for (let i = 1; i <= TOTAL_CARDS; i++) {
-    const id = String(i).padStart(3, "0");
+  // Filter displayed cards based on active filter.
+  const displayed = idsToShow.filter((id) => {
     const row = cards[id];
 
     if (filter === "all") {
-      displayed.push(id);
-    } else if (filter === "owned" && row?.owned) {
-      displayed.push(id);
-    } else if (filter === "wanted" && row?.wanted) {
-      displayed.push(id);
-    } else if (filter === "missing" && (!row || !row.owned)) {
-      displayed.push(id);
+      return true;
     }
+
+    if (filter === "owned") {
+      return row?.owned;
+    }
+
+    if (filter === "wanted") {
+      return row?.wanted;
+    }
+
+    if (filter === "missing") {
+      return !row || !row.owned;
+    }
+
+    return true;
+  });
+
+  /// Format badge text shown on each card.
+  function formatBadge(id) {
+    // Extract the numeric suffix from a card ID.
+    function extractNumFromId(identifier) {
+      const match = identifier.match(/(\d{3})$/);
+
+      if (match && match[1]) {
+        return parseInt(match[1], 10);
+      }
+
+      return null;
+    }
+
+    // Pad a number to three digits.
+    function pad3(n) {
+      return String(n).padStart(3, "0");
+    }
+
+    // Regular card.
+    if (/^[0-9]{3}$/.test(id)) {
+      return id + "/" + counts.regular;
+    }
+
+    // Special cards.
+    if (/^sp-/.test(id)) {
+      const num = extractNumFromId(id);
+
+      if (num !== null) {
+        return num + "/" + counts.regular;
+      }
+
+      return id;
+    }
+
+    // Starter deck cards.
+    if (/^st\d?-/.test(id)) {
+      const match = id.match(/^st(\d*)-(\d{3})$/);
+      let serie = "1";
+      let num = "000";
+
+      if (match) {
+        if (match[1]) {
+          serie = match[1];
+        }
+
+        if (match[2]) {
+          num = match[2];
+        }
+      }
+
+      return "ST" + serie + " " + num;
+    }
+
+    // Chrome cards.
+    if (/^ch-/.test(id) || /^cr-/.test(id)) {
+      const num = extractNumFromId(id);
+
+      if (num !== null) {
+        return "CR " + pad3(num);
+      }
+
+      return id;
+    }
+
+    // Promotional cards.
+    if (/^p-/.test(id) || /^pr-/.test(id)) {
+      const num = extractNumFromId(id);
+
+      if (num !== null) {
+        return "P " + pad3(num);
+      }
+
+      return id;
+    }
+
+    // Default (fallback).
+    return id;
   }
+
+
 
   // Show loader until all data is ready.
   if (loading) {
@@ -163,8 +252,7 @@ function CollectionPage() {
 
   return (
     <div className="pt-38 lg:pt-22 flex flex-col justify-start items-center">
-      <Stats total={TOTAL_CARDS} owned={ownedCount} wanted={wantedCount} filter={filter} setFilter={setFilter} />
-
+      <Stats total={totalForType} owned={ownedCount} wanted={wantedCount} filter={filter} setFilter={setFilter} type={type} setType={setType} counts={counts} />
 
       <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4">
         {displayed.map((id) => {
@@ -180,7 +268,7 @@ function CollectionPage() {
 
           return (
             <div key={id} className={containerClass}>
-              <Card id={id} owned={!!row.owned} wanted={!!row.wanted} onToggleOwned={toggleOwned} onToggleWanted={toggleWanted} />
+              <Card id={id} badge={formatBadge(id)} owned={!!row.owned} wanted={!!row.wanted} onToggleOwned={toggleOwned} onToggleWanted={toggleWanted} />
             </div>
           );
         })}

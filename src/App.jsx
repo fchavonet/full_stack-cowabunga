@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAuth } from "./hooks/useAuth";
-import { setRandomFavicon } from "./utils/favicon";
+import { setNextFavicon } from "./utils/favicon";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import CollectionPage from "./pages/CollectionPage";
@@ -11,12 +11,15 @@ function App() {
   const { user } = useAuth();
 
   useEffect(() => {
-    setRandomFavicon([
-      "/favicons/leonardo.png",
-      "/favicons/michelangelo.png",
-      "/favicons/donatello.png",
-      "/favicons/raphael.png"
-    ]);
+    if (!window.__faviconSet) {
+      window.__faviconSet = true;
+      setNextFavicon([
+        "/favicons/leonardo.png",
+        "/favicons/michelangelo.png",
+        "/favicons/donatello.png",
+        "/favicons/raphael.png"
+      ]);
+    }
   }, []);
 
   let content;

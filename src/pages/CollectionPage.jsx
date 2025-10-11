@@ -159,7 +159,7 @@ function CollectionPage() {
     return true;
   });
 
-  /// Format badge text shown on each card.
+  // Format badge text shown on each card.
   function formatBadge(id) {
     // Extract the numeric suffix from a card ID.
     function extractNumFromId(identifier) {
@@ -238,8 +238,6 @@ function CollectionPage() {
     return id;
   }
 
-
-
   // Show loader until all data is ready.
   if (loading) {
     return (
@@ -254,11 +252,11 @@ function CollectionPage() {
     <div className="pt-38 lg:pt-22 flex flex-col justify-start items-center">
       <Stats total={totalForType} owned={ownedCount} wanted={wantedCount} filter={filter} setFilter={setFilter} type={type} setType={setType} counts={counts} />
 
-      <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4">
-        {displayed.map((id) => {
+      <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-6">
+        {displayed.map((id, index) => {
           const row = cards[id] || {};
 
-          let containerClass = "p-2 flex flex-col justify-center items-center rounded-2xl bg-gray-900 outline-2 outline-gray-800 shadow-lg transition duration-300 ease-in-out transform hover:scale-102";
+          let containerClass = "p-2 flex flex-col justify-center items-center rounded-2xl bg-gray-900 opacity-0 outline-2 outline-gray-800 shadow-lg transition duration-300 ease-in-out transform translate-y-8 hover:scale-102";
 
           if (row.owned) {
             containerClass += " outline-2 outline-green-500 shadow-lg shadow-green-500";
@@ -267,7 +265,12 @@ function CollectionPage() {
           }
 
           return (
-            <div key={id} className={containerClass}>
+            <div className={containerClass} key={id + "-" + type + "-" + filter}
+              style={{
+                animation: "fadeInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) " + (index * 0.04)
+                  + "s forwards"
+              }}
+            >
               <Card id={id} badge={formatBadge(id)} owned={!!row.owned} wanted={!!row.wanted} onToggleOwned={toggleOwned} onToggleWanted={toggleWanted} />
             </div>
           );

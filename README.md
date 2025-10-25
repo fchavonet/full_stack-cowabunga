@@ -51,7 +51,7 @@ This is a personal, non-commercial project. Not affiliated with UVS Games, Nicke
     - Run the following command:
 
 ```
-git clone https://github.com/fchavonet/web-cowabunga.git
+git clone https://github.com/fchavonet/full_stack-cowabunga.git
 ```
 
 2. Open the cloned repository.

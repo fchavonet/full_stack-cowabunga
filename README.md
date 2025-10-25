@@ -1,76 +1,47 @@
 # Cowabunga
 
-## Table of contents
+## Description
 
-<details>
-    <summary>
-        CLICK TO ENLARGE 😇
-    </summary>
-    <a href="#description">Description</a>
-    <br>
-    <a href="#objectives">Objectives</a>
-    <br>
-    <a href="#tech-stack">Tech stack</a>
-    <br>
-    <a href="#files-description">Files description</a>
-    <br>
-    <a href="#installation_and_how_to_use">Installation and how to use</a>
-    <br>
-    <a href="#whats-next">What's next?</a>
-    <br>
-    <a href="#thanks">Thanks</a>
-    <br>
-    <a href="#authors">Authors</a>
-</details>
-
-## <span id="description">Description</span>
-
-Cowabunga is a lightweight web application for cataloging Teenage Mutant Ninja Turtles cards from UniVersus games.
+Cowabunga is a lightweight web app for cataloging Teenage Mutant Ninja Turtles cards from the UniVersus TCG.
 
 The idea came after a trip to London, where a friend and I discovered a new TMNT card collection and started buying packs.
 
-I used the opportunity to keep practicing React, experiment with Supabase (Auth + Postgres), and ship a minimal but functional app in about two days.
+I used the opportunity to keep practicing React, experiment with Supabase (Auth and Postgres), and ship a minimal but functional app in about two days.
 
 This is a personal, non-commercial project. Not affiliated with UVS Games, Nickelodeon, or any rights holder. All trademarks belong to their respective owners.
 
-## <span id="objectives">Objectives</span>
+## Objectives
 
 - Practice a fast end-to-end flow: Vite + React, Supabase for Auth/DB, GitHub Pages deployment.
 - Keep the scope minimal yet useful: Google sign-in, card list, simple inventory states, and sorting.
 - Structure data for future expansion.
 - Keep code readable and straightforward.
 
-## <span id="tech-stack">Tech stack</span>
+## Tech Stack
 
-<p align="left">
-    <img src="https://img.shields.io/badge/HTML5-e34f26?logo=html5&logoColor=white&style=for-the-badge" alt="HTML5 badge">
-    <img src="https://img.shields.io/badge/CSS3-1572b6?logo=css&logoColor=white&style=for-the-badge" alt="CSS3 badge">
-    <img src="https://img.shields.io/badge/JAVASCRIPT-f7df1e?logo=javascript&logoColor=black&style=for-the-badge" alt="JavaScript badge">
-    <img src="https://img.shields.io/badge/REACT-61dafb?logo=react&logoColor=black&style=for-the-badge" alt="REACT badge">
-    <img src="https://img.shields.io/badge/TAILWIND-06b6d4?logo=tailwindcss&logoColor=white&style=for-the-badge" alt="Tailwind badge">
-    <img src="https://img.shields.io/badge/NODE.JS-5fa04e?logo=node.js&logoColor=white&style=for-the-badge" alt="Node.js badge">
-    <img src="https://img.shields.io/badge/Supabase-3fcf8e?logo=supabase&logoColor=white&style=for-the-badge" alt="Supabase badge">
-    <img src="https://img.shields.io/badge/GIT-f05032?logo=git&logoColor=white&style=for-the-badge" alt="Git badge">
-    <img src="https://img.shields.io/badge/GITHUB-181717?logo=github&logoColor=white&style=for-the-badge" alt="GitHub badge">
-    <img src="https://img.shields.io/badge/MARKDOWN-000000?logo=markdown&logoColor=white&style=for-the-badge" alt="Markdown badge">
-    <img src="https://img.shields.io/badge/VS CODE-007acc?logo=data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyBmaWxsPSIjZmZmZmZmIiB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9Ii0wLjUgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KDTxnIGlkPSJTVkdSZXBvX2JnQ2FycmllciIgc3Ryb2tlLXdpZHRoPSIwIi8+Cg08ZyBpZD0iU1ZHUmVwb190cmFjZXJDYXJyaWVyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KDTxnIGlkPSJTVkdSZXBvX2ljb25DYXJyaWVyIj4KDTxwYXRoIGQ9Im0xNy44NTggMjMuOTk4LTkuNzcxLTkuNDg0LTUuODY2IDQuNDY1LTIuMjIxLTEuMTE1di0xMS43MTlsMi4yMzQtMS4xMjEgNS44NyA0LjQ2OSA5Ljc0Ny05LjQ5MyA1LjU4NyAyLjIzOXYxOS41MzFsLTUuNTc5IDIuMjN6bS0uNTYzLTE2LjE4Ni01LjU3NyA0LjE3MyA1LjU4IDQuMjAyem0tMTQuNTA3IDEuNjg1djUuMDE2bDIuNzg3LTIuNTI1eiIvPgoNPC9nPgoNPC9zdmc+&logoColor=white&style=for-the-badge" alt="VS Code badge">
-</p>
+![HTML5 badge](https://img.shields.io/badge/HTML5-e34f26?logo=html5&logoColor=white&style=for-the-badge)
+![CSS3 badge](https://img.shields.io/badge/CSS3-1572b6?logo=css&logoColor=white&style=for-the-badge)
+![JavaScript badge](https://img.shields.io/badge/JAVASCRIPT-f7df1e?logo=javascript&logoColor=black&style=for-the-badge)
+![REACT badge](https://img.shields.io/badge/REACT-61dafb?logo=react&logoColor=black&style=for-the-badge)
+![TailwindCSS badge](https://img.shields.io/badge/TAILWINDCSS-06b6d4?logo=tailwindcss&logoColor=white&style=for-the-badge)
+![Node.js badge](https://img.shields.io/badge/NODE.JS-5fa04e?logo=node.js&logoColor=white&style=for-the-badge)
+![Supabase badge](https://img.shields.io/badge/Supabase-3fcf8e?logo=supabase&logoColor=white&style=for-the-badge)
 
-## <span id="files-description">Files description</span>
+## File Description
 
-| **FILES**           | **DESCRIPTION**                                   |
-| :-----------------: | ------------------------------------------------- |
-| `public`            | Public assets.                                    |
-| `src`               | React source code (components, utilities, etc.).     |
-| `index.html`        | Application's HTML entry point.                   |
-| `vite.config.js`    | Vite configuration for development and building.  |
-| `package.json`      | Dependencies and scripts configuration.           |
-| `package-lock.json` | Exact dependency version lockfile.                |
-| `eslint.config.js`  | Linter configuration to enforce code quality.     |
-| `.gitignore`        | Specifies files and folders to be ignored by Git. |
-| `README.md`         | The README file you are currently reading 😉.     |
+| **FILE**            | **DESCRIPTION**                                                 |
+| :-----------------: | --------------------------------------------------------------- |
+| `public`            | Public assets.                                                  |
+| `src`               | React source code (components, utilities, etc.).                |
+| `index.html`        | Application's HTML entry point.                                 |
+| `vite.config.js`    | Vite configuration for development and building.                |
+| `package.json`      | Dependencies and scripts configuration.                         |
+| `package-lock.json` | Automatically generated file locking exact dependency versions. |
+| `eslint.config.js`  | Linter configuration to enforce code quality.                   |
+| `.gitignore`        | Specifies files and folders to be ignored by Git.               |
+| `README.md`         | The README file you are currently reading 😉.                   |
 
-## <span id="installation_and_how_to_use">Installation and how to use</span>
+## Installation & Usage
 
 ### Installation
 
@@ -79,15 +50,15 @@ This is a personal, non-commercial project. Not affiliated with UVS Games, Nicke
     - Navigate to the directory where you want to clone the repository.
     - Run the following command:
 
-```bash
+```
 git clone https://github.com/fchavonet/web-cowabunga.git
 ```
 
-2. Open the repository you've just cloned.
+2. Open the cloned repository.
 
 3. Install dependencies:
 
-```bash
+```
 npm install
 ```
 
@@ -100,7 +71,7 @@ npm install
 
 5. Create the card_status table:
 
-    - In your Supabase Dashboard, go to Database → Table editor.
+    - In your Supabase dashboard, go to Database → Table editor.
     - Click “New table”, name it `card_status`.
     - Add the following columns:
 
@@ -117,7 +88,7 @@ npm install
     - Enable Row Level Security (RLS) on the table.
     - Add the following policy rules (SQL or via UI):
 
-```sql
+```
 -- Allow users to read only their own rows.
 create policy "Users can view their own card status"
 on card_status for select
@@ -138,7 +109,7 @@ using (auth.uid() = user_id);
 
     - Create a `.env.local` file at the project root with:
 
-```bash
+```
 VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
@@ -149,24 +120,27 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
     
 - Go to Authentication → Providers, enable Google, and set your Redirect URLs to match your local environment:
 
-```bash
+```
 http://localhost:3000
 ```
 
 9. Start the development server:
 
-```bash
+```
 npm run dev
 ```
 
-### How to use
+### Usage
 
 1. Open the app and sign in with Google.
+   
 2. Browse the cards list.
+   
 3. Toggle the Owned or Wanted status on any card.
+   
 4. Use sorting controls to reorganize the list.
 
-You can also test the web application online by clicking [here](https://fchavonet.github.io/web-cowabunga/). 
+You can also test the project online by clicking [here](https://fchavonet.github.io/full_stack-cowabunga/). 
 
 <table>
     <tr>
@@ -175,28 +149,28 @@ You can also test the web application online by clicking [here](https://fchavone
     </tr>
     <tr valign="top">
         <td align="center">
-            <img src="./public/screenshots/screenshot-cowabunga-desktop.webp" alt="Screenshots">
+            <img src="./public/screenshots/desktop_page_screenshot.webp" alt="Desktop Screenshots" width="100%">
         </td>
         <td align="center">
-            <img src="./public/screenshots/screenshot-cowabunga-mobile.webp" alt="Mobile Screenshot" width="100%">
+            <img src="./public/screenshots/mobile_page_screenshot.webp" alt="Mobile Screenshot" width="100%">
         </td>
     </tr>
 </table>
 
-## <span id="whats-next">What's next?</span>
+## What's Next?
 
 - Search & filters (character, rarity...).
-- CSV import/export to batch update inventory.
+- CSV import/export to batch-update inventory.
 - PWA & offline caching for quick mobile access.
 - Add missing images (secret cards).
 
-## <span id="thanks">Thanks</span>
+## Thanks
 
 - Supabase for the fantastic developer experience!
 - UniVersus / UVS Games and the TMNT community for the inspiration and card ecosystem.
-- Friends who tested the app and gave quick feedback.
+- Friends, particularly Alexis, who tested the app and provided valuable feedback.
 
-## <span id="authors">Authors</span>
+## Author(s)
 
 **Fabien CHAVONET**
 - GitHub: [@fchavonet](https://github.com/fchavonet)

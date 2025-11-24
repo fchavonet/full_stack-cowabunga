@@ -257,7 +257,7 @@ function CollectionPage() {
   }
 
   return (
-    <div className="pt-44 lg:pt-30 pb-10 flex flex-col justify-start items-center">
+    <div className="pt-45 lg:pt-30 pb-10 flex flex-col justify-start items-center">
       <Stats total={totalForType} owned={ownedCount} wanted={wantedCount} filter={filter} setFilter={setFilter} type={type} setType={setType} counts={counts} />
 
       <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-6">

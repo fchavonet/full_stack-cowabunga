@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../hooks/useAuth";
 import { getAllCardIds } from "../lib/cardImages";
@@ -13,6 +13,8 @@ function CollectionPage() {
   const [loading, setLoading] = useState(true);
 
   // Retrieve all card IDs grouped by category.
+  const alreadyLoadedRef = useRef(false);
+
   const { all, regular, special, starter, chrome, promotional, counts } = getAllCardIds();
 
   useEffect(() => {
@@ -21,6 +23,12 @@ function CollectionPage() {
       if (!user) {
         return;
       }
+
+      if (alreadyLoadedRef.current) {
+        return;
+      }
+
+      alreadyLoadedRef.current = true;
 
       setLoading(true);
 

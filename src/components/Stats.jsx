@@ -3,7 +3,7 @@ function Stats({ total, owned, wanted, filter, setFilter, type, setType, counts 
 
   // Return dynamic button styles based on the active filter
   function getButtonClass(typeName) {
-    let base = "w-32 px-4 py-2 text-xs rounded-xl border cursor-pointer transition";
+    let base = "w-36 px-4 py-2 text-xs rounded-xl border cursor-pointer transition";
     let state = "";
 
     if (typeName === filter) {
